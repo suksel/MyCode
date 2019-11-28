@@ -4,6 +4,7 @@ data pension;
   *years=days_to_spd/365;
   months=intck('month',today(),spd);
   years=intck('year',today(),spd);
+  needed=months*5000;
   label spd='State Pension Day'
         years='Years'
         months='Months to SPD'
