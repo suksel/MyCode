@@ -1,3 +1,4 @@
+ /* How much? */
 data pension;
   spd='21Jul2027'd;
   days_to_spd=spd-today();
