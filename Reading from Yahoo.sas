@@ -1,6 +1,8 @@
 *****************************************************************************
 * Version 1 - Reading data from Yahoo                                       *
 *                                               Steve Ludlow - Dec 2018     *
+* Needs fixing - setup for both Windows and Linux folders                   *
+* Yahoo changed location again....                                          *
 *****************************************************************************
 ;
 

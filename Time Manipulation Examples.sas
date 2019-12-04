@@ -1,5 +1,17 @@
 /* Location for final OECD table */
-libname mylib "c:\data\OECD";
+/* Again put code to change folder depending on whether Windows or Linux */
+
+/* Use the IFC function as a shorthand for if-then, returning a character string */
+%let mylib = %sysfunc(
+  ifc(&SYSSCP. = WIN,
+       c:\data\temp,
+       /data
+    )
+  );
+ 
+libname mylib "&mylib.";
+
+*libname mylib "c:\data\OECD";
 
 /* Just read an existing table and apply a FORMAt to an existing date field */
 data pr_sales;
