@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><Task schemaVersion="5.4">
+   <Registration>
+      <Name>Convert All Negative Values to 0</Name>
+      <Description>This task converts ALL NUMERIC variables where the value is negative to 0</Description>
+      <GUID>9f2c8653-549d-4714-abc7-c0be38abb3de</GUID>
+      <Procedures/>
+      <Version>3.8</Version>
+      <Links>
+         <Link href="http://documentation.sas.com/?softwareId=STUDIOMID&amp;softwareVersion=3.8&amp;softwareContextId=tasks&amp;requestor=inapp">SAS Studio Task Reference Guide</Link>
+         <Link href=""> </Link>
+         <Link href=""> </Link>     
+		 <Link href="http://documentation.sas.com/?softwareId=MVADOC&amp;softwareVersion=3.8_9.4&amp;softwareContextId=data_step&amp;requestor=inapp">DATA Step Functions</Link>		 
+         <Link href=""> </Link>
+         <Link href=""> </Link>         
+         <Link href="http://support.sas.com/training/studio">SAS Tutorials</Link>           
+      </Links>
+   <Category>HMRC</Category>
+   </Registration>
+   <Metadata>
+		
+      <DataSources>
+         <DataSource name="dataset" where="true"> 
+         <Roles>
+            <Role maxVars="1" minVars="1" name="var1" type="N">Variable 1:</Role>              
+            <Role maxVars="1" minVars="0" name="var2" type="N">Variable 2:</Role>
+            <Role maxVars="1" minVars="0" name="var3" type="N">Variable 3:</Role>            
+         </Roles>
+         </DataSource>      
+      </DataSources>
+
+      <Options>
+         <Option inputType="string" name="datatab">DATA</Option>        
+         <Option inputType="string" name="datagrp">DATA</Option>
+  
+         
+         <Option inputType="string" name="outputgrp">OUTPUT DATA SET</Option>
+         <Option defaultValue="work.transform" indent="1" inputType="outputdata" name="outputDS" required="true" unique="true">Data set name:</Option>
+			<Option inputType="string" name="showDataGroup">Show Output Data</Option>
+			<Option defaultValue="0" inputType="checkbox" name="showData">Show output data</Option>
+			<Option defaultValue="showSubsetDataChoice" inputType="combobox" name="showDataCombo">Show:</Option>
+			<Option inputType="string" name="showSubsetDataChoice">Show subset of output data</Option>
+			<Option inputType="string" name="showAllDataChoice">Show all output data</Option>
+			<Option decimalPlaces="0" defaultValue="10" increment="1" indent="1" inputType="numstepper" invalidMessage="Enter an integer greater than 0 for the number of observations to be shown" minValue="1" missingMessage="Enter an integer greater than 0 for the number of observations to be shown" name="subsetNobs" promptMessage="Enter an integer greater than 0 for the number of observations to be shown" rangeMessage="Enter an integer greater than 0 for the number of observations to be shown" required="true">Number of observations to show:</Option>
+      <Option inputType="string" name="printTitle">Transformed data set</Option>
+         
+      </Options>
+		
+      </Metadata>
+      <UI>
+      <Container option="datatab">
+         <Group open="true" option="datagrp">      
+            <DataItem data="dataset"/>
+         </Group>
+     
+        
+         <Group open="true" option="outputgrp">
+            <OptionItem option="outputDS"/>
+				<Group open="true" option="showDataGroup">
+					<OptionItem option="showData"/>
+					<OptionChoice option="showDataCombo">
+						<OptionItem option="showSubsetDataChoice"/>
+						<OptionItem option="showAllDataChoice"/>
+					</OptionChoice>
+					<OptionItem option="subsetNobs"/>
+				</Group>            
+         </Group>         
+      </Container>
+      </UI>
+      
+      <Dependencies>
+     
+    
+      </Dependencies>
+	
+   <CodeTemplate>
+	<![CDATA[
+	
+**********************************************************************************************************************************************************
+* Example of how to convert all negative values to 0                                                                                                     *
+* Based on https://blogs.sas.com/content/sastraining/2017/06/27/how-to-perform-an-operation-on-all-numeric-or-all-character-variables-in-a-sas-data-set/ *
+* Started with the Transform Data task and modified                                                                                                      *
+*                                                                                                                Steve Ludlow - SAS UK - October 2020    *
+* Note: it converts ALL numeric fields if a date was before 01Jan1960 then it would convert that to 0 as well                                            *
+**********************************************************************************************************************************************************
+;
+
+data $outputDS;
+   set $dataset;
+    array Nums {*}  _numeric_;
+  do i=1 to dim(Nums);
+  if Nums[i] lt 0 then Nums[i}=0;
+  end;
+  drop i;
+ run;
+ 
+#if ($showData == '1')
+proc print data=$outputDS#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "$printTitle - ${outputDS.get('value')}";
+run;
+title;
+#end
+	]]>
+   </CodeTemplate>
+</Task>
