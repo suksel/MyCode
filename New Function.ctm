@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><Task schemaVersion="5.4">
+   <Registration>
+      <Name>New Function</Name>
+      <Description>The Transform Data task creates new variables that are tranformations of existing variables.</Description>
+      <GUID>9f2c8653-549d-4714-abc7-c0be38abb3de</GUID>
+      <Procedures/>
+      <Version>3.8</Version>
+      <Links>
+         <Link href="http://documentation.sas.com/?softwareId=STUDIOMID&amp;softwareVersion=3.8&amp;softwareContextId=tasks&amp;requestor=inapp">SAS Studio Task Reference Guide</Link>
+         <Link href=""> </Link>
+         <Link href=""> </Link>     
+		 <Link href="http://documentation.sas.com/?softwareId=MVADOC&amp;softwareVersion=3.8_9.4&amp;softwareContextId=data_step&amp;requestor=inapp">DATA Step Functions</Link>		 
+         <Link href=""> </Link>
+         <Link href=""> </Link>         
+         <Link href="http://support.sas.com/training/studio">SAS Tutorials</Link>           
+      </Links>
+   <Category>HMRC</Category>
+   </Registration>
+   <Metadata>
+		
+      <DataSources>
+         <DataSource name="dataset" where="true"> 
+         <Roles>
+            <Role maxVars="1" minVars="1" name="var1" type="N">Variable 1:</Role>              
+            <Role maxVars="1" minVars="0" name="var2" type="N">Variable 2:</Role>
+            <Role maxVars="1" minVars="0" name="var3" type="N">Variable 3:</Role>            
+         </Roles>
+         </DataSource>      
+      </DataSources>
+
+      <Options>
+         <Option inputType="string" name="datatab">DATA</Option>        
+         <Option inputType="string" name="datagrp">DATA</Option>
+         <Option inputType="string" name="var1grp">TRANSFORM 1</Option>
+         <Option inputType="combobox" name="transform1">Transform:</Option>
+         <Option indent="1" inputType="inputtext" missingMessage="Enter the right hand side of the transformation equation" name="custom1" promptMessage="Enter the right hand side of the transformation equation" required="true">Custom transform:</Option>
+         <Option indent="1" inputType="string" name="customNote1">For example, to create a new variable that contains the log of X, enter LOG(X)</Option>         
+         <Option inputType="string" name="var2grp">TRANSFORM 2</Option>
+         <Option inputType="combobox" name="transform2">Transform:</Option>
+         <Option indent="1" inputType="inputtext" missingMessage="Enter the right hand side of the transformation equation" name="custom2" promptMessage="Enter the right hand side of the transformation equation" required="true">Custom transform:</Option>
+         <Option indent="1" inputType="string" name="customNote2">For example, to create a new variable that contains the log of X, enter LOG(X)</Option>   
+         
+         <Option inputType="string" name="var3grp">TRANSFORM 3</Option> 
+         <Option inputType="combobox" name="transform3">Transform:</Option>
+         <Option indent="1" inputType="inputtext" missingMessage="Enter the right hand side of the transformation equation" name="custom3" promptMessage="Enter the right hand side of the transformation equation" required="true">Custom transform:</Option>
+         <Option indent="1" inputType="string" name="customNote3">For example, to create a new variable that contains the log of X, enter LOG(X)</Option>          
+         
+         <Option inputType="string" name="logTrans">Natural log</Option>
+         <Option inputType="string" name="invTrans">Inverse</Option>
+         <Option inputType="string" name="sqrtTrans">Square root</Option>
+         <Option inputType="string" name="squareTrans">Square</Option>
+         <Option inputType="string" name="invSqrTrans">Inverse square</Option>
+         <Option inputType="string" name="invSqrtTrans">Inverse square root</Option>
+         
+         <Option inputType="string" name="integer">Integer</Option>
+         <Option inputType="string" name="customTrans">Specify custom transformation</Option>
+         
+         <Option inputType="string" name="outputgrp">OUTPUT DATA SET</Option>
+         <Option defaultValue="work.transform" indent="1" inputType="outputdata" name="outputDS" required="true" unique="true">Data set name:</Option>
+			<Option inputType="string" name="showDataGroup">Show Output Data</Option>
+			<Option defaultValue="0" inputType="checkbox" name="showData">Show output data</Option>
+			<Option defaultValue="showSubsetDataChoice" inputType="combobox" name="showDataCombo">Show:</Option>
+			<Option inputType="string" name="showSubsetDataChoice">Show subset of output data</Option>
+			<Option inputType="string" name="showAllDataChoice">Show all output data</Option>
+			<Option decimalPlaces="0" defaultValue="10" increment="1" indent="1" inputType="numstepper" invalidMessage="Enter an integer greater than 0 for the number of observations to be shown" minValue="1" missingMessage="Enter an integer greater than 0 for the number of observations to be shown" name="subsetNobs" promptMessage="Enter an integer greater than 0 for the number of observations to be shown" rangeMessage="Enter an integer greater than 0 for the number of observations to be shown" required="true">Number of observations to show:</Option>
+      <Option inputType="string" name="printTitle">Transformed data set</Option>
+         
+      </Options>
+		
+      </Metadata>
+      <UI>
+      <Container option="datatab">
+         <Group open="true" option="datagrp">      
+            <DataItem data="dataset"/>
+         </Group>
+         <Group open="true" option="var1grp">
+            <RoleItem role="var1"/>
+            <OptionChoice option="transform1">
+               <OptionItem option="invSqrTrans"/>
+               <OptionItem option="invTrans"/>
+               <OptionItem option="invSqrtTrans"/>
+               <OptionItem option="logTrans"/>
+               <OptionItem option="sqrtTrans"/>
+               <OptionItem option="squareTrans"/>
+               
+                <OptionItem option="integer"/>
+               <OptionItem option="customTrans"/>
+            </OptionChoice>
+            <OptionItem option="custom1"/>
+            <OptionItem option="customNote1"/>
+         </Group>
+         <Group open="false" option="var2grp">
+            <RoleItem role="var2"/>
+            <OptionChoice option="transform2">
+               <OptionItem option="invSqrTrans"/>
+               <OptionItem option="invTrans"/>
+               <OptionItem option="invSqrtTrans"/>
+               <OptionItem option="logTrans"/>
+               <OptionItem option="sqrtTrans"/>
+               <OptionItem option="squareTrans"/>
+               
+                 <OptionItem option="integer"/>
+               <OptionItem option="customTrans"/>
+            </OptionChoice>
+            <OptionItem option="custom2"/>
+            <OptionItem option="customNote2"/>            
+         </Group>
+         <Group open="false" option="var3grp">
+            <RoleItem role="var3"/>
+            <OptionChoice option="transform3">
+               <OptionItem option="invSqrTrans"/>
+               <OptionItem option="invTrans"/>
+               <OptionItem option="invSqrtTrans"/>
+               <OptionItem option="logTrans"/>
+               <OptionItem option="sqrtTrans"/>
+               <OptionItem option="squareTrans"/>
+               
+                 <OptionItem option="integer"/>
+               <OptionItem option="customTrans"/>              
+            </OptionChoice> 
+            <OptionItem option="custom3"/>
+            <OptionItem option="customNote3"/>            
+         </Group>
+         <Group open="false" option="outputgrp">
+            <OptionItem option="outputDS"/>
+				<Group open="true" option="showDataGroup">
+					<OptionItem option="showData"/>
+					<OptionChoice option="showDataCombo">
+						<OptionItem option="showSubsetDataChoice"/>
+						<OptionItem option="showAllDataChoice"/>
+					</OptionChoice>
+					<OptionItem option="subsetNobs"/>
+				</Group>            
+         </Group>         
+      </Container>
+      </UI>
+      
+      <Dependencies>
+      <Dependency condition="($transform1 == 'customTrans')">
+         <Target action="show" conditionResult="true" option="custom1"/>
+         <Target action="hide" conditionResult="false" option="custom1"/>
+         <Target action="show" conditionResult="true" option="customNote1"/>
+         <Target action="hide" conditionResult="false" option="customNote1"/>
+      </Dependency>
+
+      <Dependency condition="($transform2 == 'customTrans')">
+         <Target action="show" conditionResult="true" option="custom2"/>
+         <Target action="hide" conditionResult="false" option="custom2"/>
+         <Target action="show" conditionResult="true" option="customNote2"/>
+         <Target action="hide" conditionResult="false" option="customNote2"/>         
+      </Dependency>
+      <Dependency condition="($transform3 == 'customTrans')">
+         <Target action="show" conditionResult="true" option="custom3"/>
+         <Target action="hide" conditionResult="false" option="custom3"/>
+         <Target action="show" conditionResult="true" option="customNote3"/>
+         <Target action="hide" conditionResult="false" option="customNote3"/>         
+      </Dependency>
+		<Dependency condition="($showData == '1')">
+			<Target action="show" conditionResult="true" option="showDataCombo"/>
+			<Target action="hide" conditionResult="false" option="showDataCombo"/>
+		</Dependency>
+		<Dependency condition="($showData == '1' &amp;&amp; $showDataCombo == 'showSubsetDataChoice')">
+			<Target action="show" conditionResult="true" option="subsetNobs"/>
+			<Target action="hide" conditionResult="false" option="subsetNobs"/>
+		</Dependency>     
+      </Dependencies>
+	
+   <CodeTemplate>
+	<![CDATA[
+data $outputDS;
+   set $dataset;
+   #if($dataset.getWhereClause() != '') where $dataset.getWhereClause(); #end
+   #foreach($item in $var1)
+      #set($varname1 = $item)
+      #set($nlsname1 = $item.get('value'))  
+   #end
+
+   #if($transform1 == 'logTrans') $CTMUtil.toSASName("log_$nlsname1") = log($varname1);
+      #elseif($transform1 == 'invTrans') $CTMUtil.toSASName("inv_$nlsname1") = 1 / $varname1;
+      #elseif($transform1 == 'sqrtTrans') $CTMUtil.toSASName("sqrt_$nlsname1") = sqrt($varname1);
+      #elseif($transform1 == 'squareTrans') $CTMUtil.toSASName("sqr_$nlsname1") = $varname1 **2;
+      #elseif($transform1 == 'invSqrtTrans') $CTMUtil.toSASName("invrt_$nlsname1") = 1 / sqrt($varname1);
+      #elseif($transform1 == 'invSqrTrans') $CTMUtil.toSASName("inv2_$nlsname1") = 1 / $varname1**2;
+      
+      #elseif($transform1 == 'integer') $CTMUtil.toSASName("int_$nlsname1") = int($varname1);
+      #else $CTMUtil.toSASName("tr1_$nlsname1") = $custom1;
+   #end
+   #if($var2.size() > 0)
+      #foreach($item in $var2)
+         #set($varname2 = $item)
+         #set($nlsname2 = $item.get('value'))  
+      #end     
+      #if($transform2 == 'logTrans') $CTMUtil.toSASName("log_$nlsname2") = log($varname2);
+         #elseif($transform2 == 'invTrans') $CTMUtil.toSASName("inv_$nlsname2") = 1 / $varname2;
+         #elseif($transform2 == 'sqrtTrans') $CTMUtil.toSASName("sqrt_$nlsname2") = sqrt($varname2);
+         #elseif($transform2 == 'squareTrans') $CTMUtil.toSASName("sqr_$nlsname2") = $varname2 **2;
+         #elseif($transform2 == 'invSqrtTrans') $CTMUtil.toSASName("invrt_$nlsname2") = 1 / sqrt($varname2);
+         #elseif($transform2 == 'invSqrTrans') $CTMUtil.toSASName("inv2_$nlsname2") = 1 / $varname2**2;
+         
+         #elseif($transform2 == 'integer') $CTMUtil.toSASName("int_$nlsname2") = int($varname2);
+         #else $CTMUtil.toSASName("tr2_$nlsname2") = $custom2;
+      #end
+   #end
+   #if($var3.size() > 0)
+      #foreach($item in $var3)
+         #set($varname3 = $item)
+         #set($nlsname3 = $item.get('value'))  
+      #end   
+      #if($transform3 == 'logTrans') $CTMUtil.toSASName("log_$nlsname3") = log($varname3);
+         #elseif($transform3 == 'invTrans') $CTMUtil.toSASName("inv_$nlsname3") = 1 / $varname3;
+         #elseif($transform3 == 'sqrtTrans') $CTMUtil.toSASName("sqrt_$nlsname3") = sqrt($varname3);
+         #elseif($transform3 == 'squareTrans') $CTMUtil.toSASName("sqr_$nlsname3") = $varname3 **2;
+         #elseif($transform3 == 'invSqrtTrans') $CTMUtil.toSASName("invrt_$nlsname3") = 1 / sqrt($varname3);
+         #elseif($transform3 == 'invSqrTrans') $CTMUtil.toSASName("inv2_$nlsname3") = 1 / $varname3**2;
+         
+          #elseif($transform3 == 'integer') $CTMUtil.toSASName("int_$nlsname3") = int($varname3);
+         #else $CTMUtil.toSASName("tr3_$nlsname3") = $custom3;
+      #end
+   #end
+run;
+#if ($showData == '1')
+proc print data=$outputDS#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "$printTitle - ${outputDS.get('value')}";
+run;
+title;
+#end
+	]]>
+   </CodeTemplate>
+</Task>
