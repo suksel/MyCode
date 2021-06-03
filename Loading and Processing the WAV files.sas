@@ -42,7 +42,14 @@ proc cas;
  /* mfccOptions - this sets the mel-frequency cepstral coefficients (MFCC)  
     nCeps = Integer - specifies the number of cepstral coefficients in each MFCC feature frame (including C0) default=13 - minimum=1*/
         mfccOptions={nCeps=10.0} 
+ /* The frequency bins to use for the audio processing are configured using the melBanksOptions parameter and its subparameters. 
+    specifies the settings to use to determine the mel-frequency banks. 
+    nBins - specifies the number of triangular mel-frequency bins. */
         melBanksOptions={nBins=40.0} 
+ /* Specifies the settings to use to determine how to break the audio file into frames. 
+    frameShift = specifies the time difference (in milliseconds) between the beginnings of consecutive frames - default is 10
+    frameLength = specifies the length of a frame (in milliseconds) - default is 25
+    dither = specifies the dithering constant (0.0 means no dithering) */
         frameExtractionOptions={"frameShift"=10, "frameLength"=25, "dither"=0.0}
  /* Just input and output tables */
         casOut={name="wavfeatures", caslib="Public", promote="TRUE"} 
@@ -54,6 +61,9 @@ proc cas;
     whereas audio data files that produce more frames than the value of this parameter simply have their extra frames dropped.
  */
         nOutputFrames=10
+  /* featureScalingMethod - specifies the feature scaling method to apply to the computed feature vectors.
+     STANDARDIZATION - specifies that the set containing the same coefficient across all frames in an audio file should be scaled 
+     so that the resulting set has a mean of zero and unit variance. */
         featureScalingMethod="STANDARDIZATION"
   ;
 run;
